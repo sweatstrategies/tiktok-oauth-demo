@@ -30,9 +30,14 @@ export default async function handler(req, res) {
     });
 
     const tokenData = await tokenRes.json();
-
     return res.status(200).json(tokenData);
   }
 
-  res.status(404).send("Not found");
+  // Default route to confirm the endpoint is working
+  if (!req.query.path) {
+    return res.status(200).send("TikTok API route is working!");
+  }
+
+  // If none of the above match
+  return res.status(404).send("Not found");
 }
